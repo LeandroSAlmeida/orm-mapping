@@ -20,7 +20,7 @@ public class Atividade {
     private Categoria categoria;
 
     @ManyToMany(mappedBy = "atividades")
-    private List<Participante> participantes;
+    private List<Participante> participantes = new ArrayList<>();
     @OneToMany(mappedBy = "atividade")
     private List<Bloco> blocos = new ArrayList<>();
 
@@ -81,6 +81,7 @@ public class Atividade {
     public List<Bloco> getBlocos() {
         return blocos;
     }
+
 
     @Override
     public boolean equals(Object o) {
