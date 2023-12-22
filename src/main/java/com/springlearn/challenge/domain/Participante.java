@@ -1,10 +1,19 @@
 package com.springlearn.challenge.domain;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "tb_participante")
 public class Participante {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
+    @Column(unique = true)
     private String email;
-
+    @ManyToOne
+    @JoinColumn(name = "atividades")
+    private Atividade atividades;
     public Participante() {
     }
 
@@ -36,5 +45,13 @@ public class Participante {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Atividade getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(Atividade atividades) {
+        this.atividades = atividades;
     }
 }

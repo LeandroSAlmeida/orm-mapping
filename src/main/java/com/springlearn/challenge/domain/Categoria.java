@@ -1,10 +1,19 @@
 package com.springlearn.challenge.domain;
 
-import java.util.Objects;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "tb_categoria")
 public class Categoria {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String descricao;
+    @OneToMany(mappedBy = "categoria")
+    private List<Atividade> atividades = new ArrayList<>();
 
     public Categoria() {
     }
@@ -30,4 +39,7 @@ public class Categoria {
         this.descricao = descricao;
     }
 
+    public List<Atividade> getAtividades() {
+        return atividades;
+    }
 }

@@ -1,10 +1,27 @@
 package com.springlearn.challenge.domain;
 
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "tb_atividade")
 public class Atividade {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String descricao;
     private Double preco;
+    @ManyToOne
+    @JoinColumn(name = "categoria")
+    private Categoria categoria;
+
+    @OneToMany(mappedBy = "atividades")
+    private List<Participante> participantes = new ArrayList<>();
+    @OneToMany(mappedBy = "atividade")
+    private List<Bloco> blocos = new ArrayList<>();
 
     public Atividade() {
     }
@@ -46,5 +63,21 @@ public class Atividade {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<Participante> getParticipantes() {
+        return participantes;
+    }
+
+    public List<Bloco> getBlocos() {
+        return blocos;
     }
 }
